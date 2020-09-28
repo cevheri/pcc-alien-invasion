@@ -14,10 +14,11 @@ Oyuncu boşluk çubuğuna bastığında gemi mermi ateşleyebilmelidir.
 Bu davranışı oluşturduktan sonra dikkatimizi uzaylılara çevirebilir ve 
 oynanışı iyileştirebiliriz.
 
-### python crash course
+başlatma / terminal
+> python3.8 alien_invasion.py
 
-Chapter 12
-===
+### python crash course
+* Chapter 12, 13, 14
 
 Restore Points
 ---
