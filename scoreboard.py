@@ -64,6 +64,7 @@ class Scoreboard():
             ship = Ship(self.ai_settings, self.screen)
             ship.rect.x = 10 + ship_number * ship.rect.width
             ship.rect.y = 10
+            ship.image = pygame.image.load('images/ship.bmp')
             self.ships.add(ship)
         
     def show_score(self):
