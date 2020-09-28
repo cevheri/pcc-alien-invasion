@@ -100,6 +100,33 @@ class Bullet(Sprite):
 
 
 #####################################################
+
+class Alien(Sprite):
+    """A class to represent a single alien in the fleet."""
+
+    def __init__(self, ai_settings, screen):
+        """Initialize the alien and set its starting position."""
+        super(Alien, self).__init__()
+        self.screen = screen
+        self.ai_settings = ai_settings
+
+        # Load the alien image and set its rect attribute.
+        self.image = pygame.image.load('images/alien.bmp')
+        self.rect = self.image.get_rect()
+
+        # Start each new alien near the top left of the screen.
+        self.rect.x = self.rect.width
+        self.rect.y = self.rect.height
+
+        # Store the alien's exact position.
+        self.x = float(self.rect.x)
+
+    def blitme(self):
+        """Draw the alien at its current location."""
+        self.screen.blit(self.image, self.rect)
+
+
+#####################################################
 # class GameFunctions():
 
 def check_events(ai_settings, screen, ship, bullets):
@@ -137,7 +164,7 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
 
 
-def update_screen(ai_settings, screen, ship, bullets):
+def update_screen(ai_settings, screen, ship, alien, bullets):
     """Update images on the screen and flip to the new screen."""
 
     # Redraw the screen during each pass through the loop.
@@ -148,6 +175,7 @@ def update_screen(ai_settings, screen, ship, bullets):
         bullet.draw_bullet()
 
     ship.blitme()
+    alien.blitme()
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
@@ -163,7 +191,7 @@ def update_bullets(bullets):
         if bullet.rect.bottom < 0:
             bullets.remove(bullet)
 
-    print(len(bullets))
+    # print(len(bullets))
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -192,11 +220,14 @@ def run_game():
     # Make a group to store bullets in.
     bullets = Group()
 
+    # Make an alien.
+    alien = Alien(ai_settings, screen)
+
     while True:
         check_events(ai_settings, screen, ship, bullets)
         ship.update()
         update_bullets(bullets)
-        update_screen(ai_settings, screen, ship, bullets)
+        update_screen(ai_settings, screen, ship, alien, bullets)
 
 
 run_game()
